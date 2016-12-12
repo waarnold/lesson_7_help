@@ -17,8 +17,6 @@ var Post  = Backbone.Model.extend({
   },
 });
 
-var User  = Backbone.Model.extend();
-
 var Posts = Backbone.Collection.extend({
   model: Post,
   url: 'http://jsonplaceholder.typicode.com/posts',
@@ -37,23 +35,21 @@ var Posts = Backbone.Collection.extend({
   },
 });
 
+var User  = Backbone.Model.extend();
 var Users = Backbone.Collection.extend({ model: User, });
-
 var blogRoll = new Posts();
 var blogAuthors = new Users();
+
 blogAuthors.reset(usersData);
 
 var newPost;
 
 blogRoll.fetch({
   success: function (collection) {
-    // newPost = collection.create({
-    //   title: 'My New Blog Post',
-    //   body: 'This is my latest blog post. I hope you like it!',
-    //   userId: 1,
-    // });
-
-    console.log(collection);
-    // console.log(newPost);
+    newPost = collection.create({
+      title: 'My New Blog Post',
+      body: 'This is my latest blog post. I hope you like it!',
+      userId: 1,
+    });
   },
 });
